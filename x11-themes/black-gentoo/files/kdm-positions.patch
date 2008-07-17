@@ -1,0 +1,44 @@
+--- work/BlackGentooKDM/BlackGentooKDM.xml	2006-10-21 20:36:30.000000000 +0200
++++ work.patched/BlackGentooKDM/BlackGentooKDM.xml	2007-10-26 23:39:05.000000000 +0200
+@@ -27,18 +27,18 @@
+ 		
+ 		
+ 		<item type="rect">		
+-			<pos anchor="c" x="45%" y="80%" width="180" height="180"/> 			
++			<pos anchor="c" x="50%" y="79%" width="180" height="180"/> 			
+ 			
+ 			<!-- username-label -->
+ 			<item type="label">
+-				<pos anchor="w" x="0%" y="30%"/>
++				<pos anchor="w" x="0%" y="32%"/>
+ 				<normal color="#bebebe" font="Verdana 12"/>
+ 				<stock type="username-label"/>
+ 			</item>
+ 			
+ 			<!-- password-label -->
+ 			<item type="label">
+-				<pos anchor="w" x="0%" y="50%"/>
++				<pos anchor="w" x="0%" y="52%"/>
+ 				<normal color="#bebebe" font="Verdana 12"/>
+ 				<stock type="password-label"/>
+ 			</item>
+@@ -46,16 +46,16 @@
+ 		
+ 		
+ 		<item type="rect">		
+-			<pos anchor="c" x="62%" y="80%" width="150" height="180"/>
++			<pos anchor="c" x="58%" y="79%" width="150" height="180"/>
+ 			
+ 			<!-- username-entry -->
+ 			<item type="entry" id="user-entry">
+-				<pos anchor="c" x="0%" y="30%" height="24" width="120"/>
++				<pos anchor="c" x="0%" y="32%" height="24" width="120"/>
+ 			</item>
+ 			
+ 			<!-- password-entry -->
+ 			<item type="entry" id="pw-entry">
+-				<pos anchor="c" x="0%" y="50%" height="24" width="120"/>
++				<pos anchor="c" x="0%" y="52%" height="24" width="120"/>
+ 			</item>
+ 		</item>			
+ 		

@@ -1,0 +1,11 @@
+--- rem-pp-python.mk.old        2007-03-07 20:06:04.000000000 -0300
++++ rem-pp-python.mk    2007-06-07 00:34:39.000000000 -0400
+@@ -5,7 +5,7 @@
+ 
+ PP_CFLAGS := -DREM_PP_PYTHON_MODULE=\"pp\"
+ PP_CFLAGS += -DPYTHON_VERSION=$(subst .,,$(PYTHON_VERSION))
+-PP_CFLAGS += -DPYTHON_PATH=\"$(REM_DIR)/$(PP_NAME)\"
++PP_CFLAGS += -DPYTHON_PATH=\"/usr/lib/remuco/$(PP_NAME)\"
+ PP_LFLAGS := -lpython$(PYTHON_VERSION)
+     
+ server: prereqs rem-pp-python.c
