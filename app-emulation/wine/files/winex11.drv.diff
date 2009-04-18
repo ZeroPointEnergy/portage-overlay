@@ -1,0 +1,124 @@
+diff -Naur a/dlls/winex11.drv/mouse.c b/dlls/winex11.drv/mouse.c
+--- a/dlls/winex11.drv/mouse.c	2009-02-02 21:26:55.000000000 +0300
++++ b/dlls/winex11.drv/mouse.c	2009-02-02 23:22:13.000000000 +0300
+@@ -88,6 +88,7 @@
+ POINT cursor_pos;
+ static DWORD last_time_modified;
+ static RECT cursor_clip; /* Cursor clipping rect */
++static BOOL sys_cursor_visible;
+ 
+ BOOL CDECL X11DRV_SetCursorPos( INT x, INT y );
+ 
+@@ -117,6 +118,7 @@
+ }
+ 
+ 
++#define MOUSE_BORDER 20
+ /***********************************************************************
+  *		get_coords
+  *
+@@ -124,19 +126,74 @@
+  */
+ static inline void get_coords( HWND hwnd, Window window, int x, int y, POINT *pt )
+ {
++    struct x11drv_thread_data *th_data = x11drv_thread_data();
+     struct x11drv_win_data *data = X11DRV_get_win_data( hwnd );
++    static POINT prev;
++    LONG w, h, Left, Top , Right, Bottom;
+ 
+     if (!data) return;
+ 
+     if (window == data->client_window)
+     {
+-        pt->x = x + data->client_rect.left;
+-        pt->y = y + data->client_rect.top;
++        Left = data->client_rect.left;
++        Top = data->client_rect.top;
++        Right = data->client_rect.right;
++        Bottom = data->client_rect.bottom;
+     }
+     else
+     {
+-        pt->x = x + data->whole_rect.left;
+-        pt->y = y + data->whole_rect.top;
++        Left = data->whole_rect.left;
++        Top = data->whole_rect.top;
++        Right = data->whole_rect.right;
++        Bottom = data->whole_rect.bottom;
++    }
++
++    wine_tsx11_lock();
++    /* Can't emulate pointer if it's visible */
++    if (!sys_cursor_visible)
++    {
++        pt->x = x + Left;
++        pt->y = y + Top;
++        prev.x = x;
++        prev.y = y;
++        wine_tsx11_unlock();
++        return;
++    }
++
++    pt->x = cursor_pos.x + x - prev.x;
++    pt->y = cursor_pos.y + y - prev.y;
++    prev.x = x;
++    prev.y = y;
++    wine_tsx11_unlock();
++
++    w = Right - Left;
++    h = Bottom - Top;
++
++    /* Mouse pointer nearing the window edge - need to warp it */
++    if (x < MOUSE_BORDER || w - x < MOUSE_BORDER ||
++        y < MOUSE_BORDER || h - y < MOUSE_BORDER)
++    {
++        XEvent xevent;
++        POINT lost = prev;
++
++        wine_tsx11_lock();
++        XWarpPointer( th_data->display, None, root_window, 0, 0, 0, 0,
++                      w/2 + Left,
++                      h/2 + Top );
++        do
++        {
++            XMaskEvent( th_data->display, PointerMotionMask, &xevent );
++            lost.x += xevent.xmotion.x - prev.x;
++            lost.y += xevent.xmotion.y - prev.y;
++            prev.x = xevent.xmotion.x;
++            prev.y = xevent.xmotion.y;
++        }
++        while (abs(w/2 - xevent.xmotion.x) > MOUSE_BORDER ||
++               abs(h/2 - xevent.xmotion.y) > MOUSE_BORDER);
++
++        wine_tsx11_unlock();
++        pt->x += lost.x - prev.x;
++        pt->y += lost.y - prev.y;
+     }
+ }
+ 
+@@ -952,6 +1009,8 @@
+     struct x11drv_thread_data *data = x11drv_init_thread_data();
+     Cursor cursor;
+ 
++    sys_cursor_visible = !lpCursor;
++
+     if (lpCursor)
+         TRACE("%ux%u, planes %u, bpp %u\n",
+               lpCursor->nWidth, lpCursor->nHeight, lpCursor->bPlanes, lpCursor->bBitsPerPixel);
+@@ -997,9 +1056,13 @@
+ 
+     pt.x = x; pt.y = y;
+     clip_point_to_rect( &cursor_clip, &pt);
+-    XWarpPointer( display, root_window, root_window, 0, 0, 0, 0,
+-                  pt.x - virtual_screen_rect.left, pt.y - virtual_screen_rect.top );
+-    XFlush( display ); /* avoids bad mouse lag in games that do their own mouse warping */
++    /* Don't touch real mouse pointer when vitalizing the mouse */
++    if (!sys_cursor_visible || x11drv_thread_data()->grab_window == None)
++    {
++        XWarpPointer( display, root_window, root_window, 0, 0, 0, 0,
++                      pt.x - virtual_screen_rect.left, pt.y - virtual_screen_rect.top );
++        XFlush( display ); /* avoids bad mouse lag in games that do their own mouse warping */
++    }
+     cursor_pos = pt;
+     wine_tsx11_unlock();
+     return TRUE;
