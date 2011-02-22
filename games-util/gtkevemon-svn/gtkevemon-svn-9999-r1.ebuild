@@ -6,7 +6,7 @@ inherit eutils subversion
 
 DESCRIPTION="GtkEveMon is a skill monitoring stand-alone application for GNU/Linux systems"
 SRC_URI=""
-ESVN_REPO_URI="svn://gtkevemon.battleclinic.com/GTKEVEMon/trunk/${PN%-svn}"
+ESVN_REPO_URI="svn://svn.battleclinic.com/GTKEVEMon/trunk/${PN%-svn}"
 ESVN_PROJECT="${PN%-svn}"
 HOMEPAGE="http://gtkevemon.battleclinic.com"
 KEYWORDS="~x86 ~amd64"
