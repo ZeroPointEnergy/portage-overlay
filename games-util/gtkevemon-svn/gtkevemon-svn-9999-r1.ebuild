@@ -15,13 +15,14 @@ LICENSE="GPL-3"
 IUSE=""
 
 DEPEND=">=dev-cpp/gtkmm-2.12
-	>=dev-libs/libxml2-2.6.27"
+        >=dev-libs/libxml2-2.6.27
+		dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
 src_install() {
 	exeinto /usr/bin
 	newexe src/${PN%-svn} ${PN%-svn}
-	newicon icon/${PN%-svn}.xpm ${PN%-svn}.xpm
+	newicon icon/${PN%-svn}.png ${PN%-svn}.png
 	newmenu icon/${PN%-svn}.desktop ${PN%-svn}.desktop
 }
 
