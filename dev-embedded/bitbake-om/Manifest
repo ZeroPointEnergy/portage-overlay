@@ -1,7 +1,0 @@
-EBUILD bitbake-om-1.6.ebuild 756 RMD160 ef77e8abf3a20e2b7d3a61226de8b05de11b39b3 SHA1 98616139b8bc5fd58722db53357456f4991e3b9b SHA256 edbc1d71caad3715cbe7e94376a47a8c60988acc422c562e191f7ecb5c99c743
-MD5 5c6f43b539402e0d5394cf8d6dcdb5f0 bitbake-om-1.6.ebuild 756
-RMD160 ef77e8abf3a20e2b7d3a61226de8b05de11b39b3 bitbake-om-1.6.ebuild 756
-SHA256 edbc1d71caad3715cbe7e94376a47a8c60988acc422c562e191f7ecb5c99c743 bitbake-om-1.6.ebuild 756
-MD5 d41d8cd98f00b204e9800998ecf8427e files/digest-bitbake-om-1.6 0
-RMD160 9c1185a5c5e9fc54612808977ee8f548b2258d31 files/digest-bitbake-om-1.6 0
-SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 files/digest-bitbake-om-1.6 0
