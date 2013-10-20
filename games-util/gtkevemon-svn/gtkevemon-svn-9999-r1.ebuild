@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils subversion
+inherit eutils mercurial
 
 DESCRIPTION="GtkEveMon is a skill monitoring stand-alone application for GNU/Linux systems"
 SRC_URI=""
-ESVN_REPO_URI="svn://svn.battleclinic.com/GTKEVEMon/trunk/${PN%-svn}"
-ESVN_PROJECT="${PN%-svn}"
+EHG_REPO_URI="https://bitbucket.org/BattleClinic/gtkevemon/${PN%-svn}"
+EHG_PROJECT="${PN%-svn}"
 HOMEPAGE="http://gtkevemon.battleclinic.com"
 KEYWORDS="~x86 ~amd64"
 SLOT="0"
@@ -19,7 +19,16 @@ DEPEND=">=dev-cpp/gtkmm-2.12
 		dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
+
+src_compile() {
+	cd gtkevemon
+
+	emake || die
+}
+
+
 src_install() {
+	cd gtkevemon
 	exeinto /usr/bin
 	newexe src/${PN%-svn} ${PN%-svn}
 	newicon icon/${PN%-svn}.png ${PN%-svn}.png
