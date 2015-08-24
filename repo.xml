@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+ 
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>technodrom</name>
+		<description>Personal Gentoo repository of Andreas Zuber</description>
+		<homepage>https://github.com/ZeroPointEnergy/portage-overlay</homepage>
+		<owner>
+			<email>a.zuber@gmx.ch</email>
+		</owner>
+		<source type="git">https://github.com/ZeroPointEnergy/portage-overlay.git</source>
+	</repo>
+</repositories>
