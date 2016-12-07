@@ -1,0 +1,57 @@
+#!/bin/bash
+read -d '' usage << USAGE
+This is a simple wrapper script to download, install and start the
+eve-online launcher for Linux.
+
+Usage:
+eve [--help] [--remove] [--reinstall]
+
+Options:
+    --help
+        Prints this help screen
+    --remove
+        Removes the eve-launcher installation. This will not remove the client cache
+        which has to be removed manually.
+    --reinstall
+        Reinstalls the eve-launcher before it gets started.
+USAGE
+
+install_dir="${HOME}/.local/share/eve"
+launcher_url="https://binaries.eveonline.com/evelauncher-1086194.tar.gz"
+
+function print_help {
+  echo "${usage}"
+}
+
+function install_launcher {
+  if [ ! -d "${install_dir}/evelauncher" ]; then
+    mkdir -p $install_dir
+    curl $launcher_url | tar -xzv -C $install_dir
+  fi
+}
+
+function remove_installer {
+  rm -rf "${install_dir}/evelauncher"
+}
+
+function start_eve {
+  ${install_dir}/evelauncher/evelauncher.sh
+}
+
+case $1 in
+    "")
+    install_launcher
+    start_eve
+    ;;
+    "--remove")
+    remove_installer
+    ;;
+    "--reinstall")
+    remove_installer
+    install_launcher
+    start_eve
+    ;;
+    *)
+    print_help
+    ;;
+esac
