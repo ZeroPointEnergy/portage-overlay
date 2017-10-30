@@ -1,8 +1,9 @@
-From a9c7dbae6622c9bcb757448e8f77419a1d372557 Mon Sep 17 00:00:00 2001
+From be1cf978f9dee9aa05c6b336397f02de083608df Mon Sep 17 00:00:00 2001
 From: Andreas Zuber <zuber@puzzle.ch>
-Date: Mon, 24 Jul 2017 23:55:21 +0200
-Subject: [PATCH] [PATCH] Append /pyfa to import path
+Date: Mon, 30 Oct 2017 09:52:32 +0100
+Subject: [PATCH 2/3] import pyfa
 
+Append /pyfa to import path
 ---
  pyfa.py | 1 +
  1 file changed, 1 insertion(+)
@@ -20,5 +21,5 @@ index 4faa1edd..9cfa5e23 100755
  from optparse import AmbiguousOptionError, BadOptionError, OptionParser
  
 -- 
-2.13.3
+2.14.3
 

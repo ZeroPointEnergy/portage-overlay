@@ -40,13 +40,13 @@ src_prepare() {
 	edos2unix config.py pyfa.py gui/bitmapLoader.py service/settings.py
 
 	# load gameDB and images from separate staticdata directory
-	eapply "${FILESDIR}/${PN}-1.30.0-staticdata.patch"
+	eapply "${FILESDIR}/${PN}-1.33.1-staticdata.patch"
 
 	# do not try to save exported html to python sitedir
-	eapply "${FILESDIR}/${PN}-1.30.0-html-export-path.patch"
+	eapply "${FILESDIR}/${PN}-1.33.1-html-export-path.patch"
 
 	# fix import path in the main script for systemwide installation
-	eapply "${FILESDIR}/${PN}-1.30.0-import-pyfa.patch"
+	eapply "${FILESDIR}/${PN}-1.33.1-import-pyfa.patch"
 
 	eapply_user
 
@@ -56,7 +56,7 @@ src_prepare() {
 		mkdir -p "${BUILD_DIR}" || die
 		sed -e "s:%%SITEDIR%%:$(python_get_sitedir):" \
 			-e "s:%%EPREFIX%%:${EPREFIX}:" \
-			"${FILESDIR}/configforced-1.15.1.py" > "${BUILD_DIR}/configforced.py"
+			"${FILESDIR}/configforced.py" > "${BUILD_DIR}/configforced.py"
 		sed -e "s:%%SITEDIR%%:$(python_get_sitedir):" \
 			pyfa.py > "${BUILD_DIR}/pyfa"
 	}
@@ -69,7 +69,7 @@ src_install() {
 		insinto "${packagedir}"
 		doins -r eos gui service utils config*.py __init__.py
 		[[ -e info.py ]] && doins info.py # only in zip releases
-		doins "${BUILD_DIR}/configforced.py"
+		#doins "${BUILD_DIR}/configforced.py"
 		python_doscript "${BUILD_DIR}/pyfa"
 		python_optimize
 	}
