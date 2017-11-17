@@ -1,9 +1,12 @@
-From be1cf978f9dee9aa05c6b336397f02de083608df Mon Sep 17 00:00:00 2001
+From c35467378232b1b21cca304f5dba37c687e51bca Mon Sep 17 00:00:00 2001
 From: Andreas Zuber <zuber@puzzle.ch>
 Date: Mon, 30 Oct 2017 09:52:32 +0100
 Subject: [PATCH 2/3] import pyfa
 
-Append /pyfa to import path
+Append $(python_get_sitedir)/pyfa to import path
+
+Ensures that pyfa's import statements continue to work for systemwide
+installation.
 ---
  pyfa.py | 1 +
  1 file changed, 1 insertion(+)

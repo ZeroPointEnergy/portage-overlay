@@ -1,16 +1,16 @@
-From 6534385c0a701a8350b67fa6d99efe263f545cf2 Mon Sep 17 00:00:00 2001
+From 54f0cd42c6f022e010c63ba7b1f123f78001b490 Mon Sep 17 00:00:00 2001
 From: Andreas Zuber <zuber@puzzle.ch>
 Date: Mon, 30 Oct 2017 09:53:31 +0100
 Subject: [PATCH 3/3] staticdata
 
 make gameDB and imgs.zip paths settable from configforced
 ---
- config.py           | 11 +++++++++--
- gui/bitmapLoader.py |  2 +-
- 2 files changed, 10 insertions(+), 3 deletions(-)
+ config.py           | 7 +++++++
+ gui/bitmapLoader.py | 2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/config.py b/config.py
-index b15c30a3..2bb8cbb0 100644
+index b15c30a3..a5a07acb 100644
 --- a/config.py
 +++ b/config.py
 @@ -30,6 +30,7 @@ savePath = None
@@ -29,23 +29,18 @@ index b15c30a3..2bb8cbb0 100644
      global saveInRoot
  
      pyfalog.debug("Configuring Pyfa")
-@@ -96,9 +98,14 @@ def defPaths(customSavePath):
-     # The database where the static EVE data from the datadump is kept.
-     # This is not the standard sqlite datadump but a modified version created by eos
-     # maintenance script
--    gameDB = getattr(configforced, "gameDB", gameDB)
-+    gameDB = getattr(configforced, "gameDB", None)
+@@ -100,6 +102,11 @@ def defPaths(customSavePath):
      if not gameDB:
--        gameDB = os.path.join(pyfaPath, "eve.db")
-+        gameDB = os.path.join('/usr/share/pyfa', "eve.db")
-+
-+    imgsZIP = getattr(configforced, "imgsZIP", None)
-+    if imgsZIP is None:
-+        imgsZIP = os.path.join('/usr/share/pyfa', "imgs.zip")
-+
+         gameDB = os.path.join(pyfaPath, "eve.db")
  
++    imgsZIP = getattr(configforced, "imgsZIP", imgsZIP)
++    if not imgsZIP:
++        imgsZIP = os.path.join(pyfaPath, "imgs.zip")
++
++
      # DON'T MODIFY ANYTHING BELOW
      import eos.config
+ 
 diff --git a/gui/bitmapLoader.py b/gui/bitmapLoader.py
 index eb53b1f1..86036001 100644
 --- a/gui/bitmapLoader.py
