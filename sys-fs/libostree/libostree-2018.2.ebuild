@@ -12,7 +12,19 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
+DEPEND="
+	app-arch/libarchive
+	app-arch/xz-utils
+	app-crypt/gpgme
+	dev-libs/glib
+	dev-libs/libassuan
+	dev-libs/libgpg-error
+	net-libs/libsoup
+	sys-apps/util-linux
+	sys-fs/fuse:0
+	sys-libs/glibc
+	sys-libs/zlib
+"
 RDEPEND="${DEPEND}"
 
 src_configure() {
