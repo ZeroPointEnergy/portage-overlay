@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit multilib eutils versionator
+inherit eutils multilib versionator xdg-utils
 
 DESCRIPTION="ICA Client for Citrix Presentation servers"
 HOMEPAGE="http://www.citrix.com/"
