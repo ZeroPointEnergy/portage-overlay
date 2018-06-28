@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>a.zuber@gmx.ch</email>
+		<name>Andreas Zuber</name>
+	</maintainer>
+	<longdescription lang="en">
+		A Crystal web framework that makes building applications fast, simple,
+		and enjoyable. Get started with quick prototyping, less bugs, and
+		blazing fast performance. 
+	</longdescription>
+	<upstream>
+		<remote-id type="github">amberframework/amber</remote-id>
+	</upstream>
+</pkgmetadata>
+
