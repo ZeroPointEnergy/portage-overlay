@@ -20,7 +20,7 @@ DEPEND="
 	virtual/libmysqlclient
 	dev-libs/openssl:0
 	dev-libs/libyaml
-	>=dev-lang/crystal-0.25.0
+	=dev-lang/crystal-0.25*
 	>=dev-util/shards-0.8.1"
 RDEPEND="${DEPEND}"
 
