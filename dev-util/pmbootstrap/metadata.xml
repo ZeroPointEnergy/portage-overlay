@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>a.zuber@gmx.ch</email>
+		<name>Andreas Zuber</name>
+	</maintainer>
+	<longdescription lang="en">
+		Sophisticated chroot/build/flash tool to develop and install postmarketOS.
+	</longdescription>
+	<upstream>
+		<remote-id type="gitlab">postmarketOS/pmbootstrap</remote-id>
+	</upstream>
+</pkgmetadata>
+
