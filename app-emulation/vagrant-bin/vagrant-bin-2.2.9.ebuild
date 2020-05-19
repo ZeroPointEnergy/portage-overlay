@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=7
 inherit rpm
 
 DESCRIPTION="Binary distribution of Vagrant."
@@ -16,7 +16,7 @@ KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND="!!app-emulation/vagrant"
-DEPEND="${RDEPEND}"
+BEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
 
