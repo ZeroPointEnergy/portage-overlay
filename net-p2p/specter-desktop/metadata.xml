@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>a.zuber@gmx.ch</email>
+    <name>Andreas Zuber</name>
+  </maintainer>
+  <longdescription>
+	specter-desktop is a user-friendly GUI around Bitcoin Core with a focus on multisignature setup with airgapped hardware wallets.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">cryptoadvance/specter-desktop</remote-id>
+  </upstream>
+</pkgmetadata>
