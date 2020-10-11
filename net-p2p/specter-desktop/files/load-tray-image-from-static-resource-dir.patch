@@ -1,0 +1,36 @@
+diff --git a/pyinstaller/specter_desktop.py b/pyinstaller/specter_desktop.py
+index 70c6eaf..9e3b7d1 100644
+--- a/pyinstaller/specter_desktop.py
++++ b/pyinstaller/specter_desktop.py
+@@ -41,6 +41,7 @@ from cryptoadvance.specter.config import DATA_FOLDER
+ from cryptoadvance.specter.helpers import deep_update
+ from cryptoadvance.specter.cli import server
+ import threading
++from importlib_resources import files
+ 
+ running = True
+ path = os.path.dirname(os.path.abspath(__file__))
+@@ -51,12 +52,7 @@ wait_for_specterd_process = None
+ 
+ 
+ def resource_path(relative_path):
+-    try:
+-        base_path = sys._MEIPASS
+-    except Exception:
+-        base_path = os.path.abspath(".")
+-    return os.path.join(base_path, relative_path)
+-
++    return files('cryptoadvance.specter').joinpath(relative_path)
+ 
+ class SpecterPreferencesDialog(QDialog):
+     def __init__(self, *args, **kwargs):
+@@ -427,7 +423,7 @@ def init_desktop_app():
+         )
+ 
+     # Create the icon
+-    icon = QIcon(os.path.join(resource_path("icons"), "icon.png"))
++    icon = QIcon(os.path.join(resource_path("static/img"), "icon.png"))
+     # Create the tray
+     tray = QSystemTrayIcon()
+     tray.setIcon(icon)
+-- 
